@@ -1,0 +1,152 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  padding: 110px 70px;
+}
+
+.about-project__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  padding-bottom: 23px;
+}
+
+.about-project__border {
+  height: 1px;
+  background-color: #dadada;
+}
+
+.about-project__info {
+  padding-top: 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px 40px;
+}
+
+.about-project__subtile {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.about-project__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.about-project__time-frame {
+  display: grid;
+  padding-top: 110px;
+  grid-template-columns: 1fr 4fr;
+  row-gap: 14px;
+  justify-content: space-between;
+}
+
+.about-project__time-period {
+  box-sizing: border-box;
+  padding: 9px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  background-color: #303030;
+  height: 36px;
+}
+
+.about-project__time-period:first-of-type {
+  background-color: #3DDC84;
+  color: #000000;
+}
+
+.about-project__stage {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+}
+
+@media screen and (max-width: 850px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__info {
+    gap: 22px 30px;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__time-frame {
+    padding-top: 93px;
+    grid-template-columns: minmax(min-content, 140px) 1fr;
+  }
+
+  .about-project__stage {
+    font-weight: 400;
+    color: #A0A0A0;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .about-project__info {
+    padding-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-project__subtile {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  
+  .about-project__subtile:nth-of-type(2) {
+    order: 1;
+    margin-top: 42px;
+  }
+
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  
+  .about-project__text:nth-of-type(2) {
+    order: 1;
+  }
+
+  .about-project__time-frame {
+    padding-top: 60px;
+    grid-template-columns: 100px 1fr;
+    row-gap: 10px;
+  }
+
+  .about-project__time-period {
+    padding: 11px 0;
+    font-size: 11px;
+    height: 35px;
+  }
+
+  .about-project__stage {
+    font-size: 11px;
+    line-height: normal;
+  }
+}
