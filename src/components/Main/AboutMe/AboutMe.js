@@ -1,9 +1,9 @@
 import React from "react";
-import "./Techs.css";
+import "./AboutMe.css";
 
-function Techs() {
+function AboutMe() {
   return (
-    <section className="techs">
+    <section className="aboutme">
       <h3 className="techs__title title">Технологии</h3>
       <div className="techs__border border"></div>
       <h2 className="techs__subtitle">7 технологий</h2>
@@ -22,4 +22,4 @@ function Techs() {
   );
 }
 
-export default Techs;
+export default AboutMe;

@@ -1,20 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./AboutProject.css";
 
 function AboutProject() {
   return (
     <section className="about-project">
-      <h3 className="about-project__title">О проекте</h3>
-      <div className="about-project__border"></div>
+      <h3 className="about-project__title title">О проекте</h3>
+      <div className="about-project__border border"></div>
       <div className="about-project__info">
         <h4 className="about-project__subtile">Дипломный проект включал 5 этапов</h4>
         <h4 className="about-project__subtile">На выполнение диплома ушло 5 недель</h4>
-        <p className="about-project__text">
+        <p className="about-project__text text">
           Составление плана, работу над бэкендом, вёрстку, добавление функциональности
           и финальные доработки.
         </p>
-        <p className="about-project__text">
+        <p className="about-project__text text">
           У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать,
           чтобы успешно защититься.
         </p>
