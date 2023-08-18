@@ -1,23 +1,27 @@
 import React from "react";
 import "./AboutMe.css";
+import aboutMePhoto from "../../../images/aboutme-img.png"
 
 function AboutMe() {
   return (
     <section className="aboutme">
-      <h3 className="techs__title title">Технологии</h3>
-      <div className="techs__border border"></div>
-      <h2 className="techs__subtitle">7 технологий</h2>
-      <p className="techs__text text">На курсе веб-разработки мы освоили технологии,
-        которые применили в дипломном проекте.</p>
-      <ul className="techs__item-list">
-        <li className="techs__item">HTML</li>
-        <li className="techs__item">CSS</li>
-        <li className="techs__item">JS</li>
-        <li className="techs__item">React</li>
-        <li className="techs__item">Git</li>
-        <li className="techs__item">Express.js</li>
-        <li className="techs__item">mongoDB</li>
-      </ul>
+      <h3 className="aboutme__title title">Студент</h3>
+      <div className="aboutme__border border"></div>
+      <div className="aboutme__biography">
+        <div className="aboutme__info">
+          <h2 className="aboutme__name">Виталий</h2>
+          <span className="aboutme__job">Фронтенд-разработчик, 30 лет</span>
+          <p className="aboutme__description">Я родился и живу в Саратове,
+           закончил факультет экономики СГУ. У меня есть жена и дочь. 
+           Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал 
+           кодить. С 2015 года работал в компании «СКБ Контур». После 
+           того, как прошёл курс по веб-разработке, начал заниматься 
+           фриланс-заказами и ушёл с постоянной работы.</p>
+           <a className="aboutme__link" href="https://github.com/RandyCheBro"
+            target='_blank' rel="noreferrer">Github</a>
+        </div>
+        <img className="aboutme__photo" src={aboutMePhoto} alt="фото автора" />
+      </div>
     </section>
   );
 }
