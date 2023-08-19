@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+import Movies from "../Movies/Movies";
 
 function App() {
   return (
@@ -14,8 +15,18 @@ function App() {
           path="/"
           element={
             <>
-              <Header />
+              <Header isLoggedIn={false} />
               <Main />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="movies"
+          element={
+            <>
+              <Header isLoggedIn={true} />
+              <Movies />
               <Footer />
             </>
           }

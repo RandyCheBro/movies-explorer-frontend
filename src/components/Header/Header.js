@@ -4,12 +4,10 @@ import logo from "../../images/logo.svg";
 import { Link, Navigate, useNavigate} from 'react-router-dom';
 import Navigation from '../Navigation/Navigation'
 
-function Header() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const navigate = useNavigate();
+function Header({isLoggedIn}) {
 
   return (
-    <header className={`header ${isLoggedIn? "header_background_black": ""}`} >
+    <header className={`header ${isLoggedIn? "header-auth": ""}`} >
       <Link className="header__logo" to={"/"}>
       <img  src={logo} alt="логотип" />
       </Link>
