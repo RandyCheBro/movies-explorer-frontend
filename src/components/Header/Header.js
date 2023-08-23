@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 import logo from "../../images/logo.svg";
-import { Link, Navigate, useNavigate} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import Navigation from '../Navigation/Navigation'
 
 function Header({isLoggedIn}) {
