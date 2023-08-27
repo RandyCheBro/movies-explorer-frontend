@@ -1,13 +1,11 @@
 import React from "react";
-import "./Movies.css";
-import SearchForm from "./SearchForm/SearchForm"
-import MoviesCardList from "./MoviesCardList/MoviesCardList"
+import SearchForm from "../Movies/SearchForm/SearchForm"
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList"
 import cards from "../../utils/cards"
-import MoreCards from "./MoreCards/MoreCards"
+import MoreCards from "../Movies/MoreCards/MoreCards"
 
-function Movies() {
+function SavedMovies() {
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(true)
-  /* const [isMoviesMore, setIsMoviesMore] = React.useState() */
 
   function handleMoviesLoading() {
     setIsMoviesLoading(!isMoviesLoading)
@@ -17,9 +15,9 @@ function Movies() {
     <section className="movies">
       <SearchForm />
       <MoviesCardList cards={cards} isMoviesLoading={isMoviesLoading}/>
-      <MoreCards onClick={handleMoviesLoading} isMoviesMore={true}/>
+      <MoreCards onClick={handleMoviesLoading} isMoviesMore={false}/>
     </section>
   );
 }
 
-export default Movies;
+export default SavedMovies;

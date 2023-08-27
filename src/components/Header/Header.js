@@ -14,8 +14,10 @@ function Header({isLoggedIn}) {
       {
         isLoggedIn? (<Navigation />): (
           <div className="header__box">
-          <Link className="header__signup-link" to="/sign-up">Регистрация</Link>
+          <Link className="header__signup-link" to="/signup">Регистрация</Link>
+          <Link to="signin">
           <button className="header__signin-button" type="button">Войти</button>
+          </Link>
         </div>
         )
       }

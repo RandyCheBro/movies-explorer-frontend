@@ -14,13 +14,13 @@ const handleIsOpen = () => {
   return (
     <nav>
       <ul className="navigation">
-        <NavLink className="navigation__link" to="/">
+        <NavLink className="navigation__link" to="/movies">
           Фильмы
         </NavLink>
-        <NavLink className="navigation__link" to="/">
+        <NavLink className="navigation__link" to="/saved-movies">
           Сохранённые фильмы
         </NavLink>
-        <NavLink className="navigation__link" to="/">
+        <NavLink className="navigation__link" to="/profile">
           Аккаунт
           <div className="navigation__icon-box">
           <img className="navigation__icon" src={iconAccount} alt="логотип аккаунта"></img>

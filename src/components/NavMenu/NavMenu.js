@@ -13,14 +13,14 @@ function NavMenu({isOpen, OnClose}) {
         <NavLink className="nav-menu__link"to="/">Главная</NavLink>
       </li>
       <li className="nav-menu__item">
-        <NavLink className="nav-menu__link" to="/">Фильмы</NavLink>
+        <NavLink className="nav-menu__link" to="/movies">Фильмы</NavLink>
       </li>
       <li className="nav-menu__item">
-        <NavLink className="nav-menu__link"to="/">Сохранённые фильмы</NavLink>
+        <NavLink className="nav-menu__link"to="/saved-movies">Сохранённые фильмы</NavLink>
       </li>
       </ul>
       <div className="nav-menu__account">
-        <NavLink className="nav-menu__link"to="/">
+        <NavLink className="nav-menu__link"to="/profile">
         Аккаунт
         <div className="navigation__icon-box">
             <img className="navigation__icon" src={iconAccount} alt="логотип аккаунта"></img>

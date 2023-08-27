@@ -1,0 +1,43 @@
+.more-cards {
+  padding: 50px 70px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.more-cards__plug {
+  height: 140px;
+}
+
+.more-cards__button {
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  border-radius: 6px;
+  background: #2f2f2f;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.more-cards__button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 850px) {
+  .more-cards {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .more-cards {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
