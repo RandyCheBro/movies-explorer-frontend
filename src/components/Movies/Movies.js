@@ -2,7 +2,6 @@ import React from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm"
 import MoviesCardList from "./MoviesCardList/MoviesCardList"
-import cards from "../../utils/cards"
 import MoreCards from "./MoreCards/MoreCards"
 
 function Movies() {
@@ -16,7 +15,7 @@ function Movies() {
   return (
     <section className="movies">
       <SearchForm />
-      <MoviesCardList cards={cards} isMoviesLoading={isMoviesLoading}/>
+      <MoviesCardList /* cards={cards} */ isMoviesLoading={isMoviesLoading}/>
       <MoreCards onClick={handleMoviesLoading} isMoviesMore={true}/>
     </section>
   );

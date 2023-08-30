@@ -2,7 +2,7 @@ import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 
-function MoviesCard(cards) {
+function MoviesCard(card) {
   const [buttonClass, setButtonClass] = React.useState("");
   const [isSavedMovie, setIsSavedMovie] = React.useState(false);
   const [buttonText] = React.useState("Сохранить")
@@ -32,14 +32,14 @@ function MoviesCard(cards) {
   return (
     <li className="movies-card">
       <div className="movies-card__info">
-        <h4 className="movies-card__title">{cards.nameRU}</h4>
-        <span className="movies-card__duration">{cards.duration}</span>
+        <h4 className="movies-card__title">{card.nameRU}</h4>
+        <span className="movies-card__duration">{card.duration}</span>
       </div>
-      <a className="movies-card__link" href={cards.trailerLink} target='_blank'
+      <a className="movies-card__link" href={card.trailerLink} target='_blank'
         rel="noreferrer">
         <img className="movies-card__image"
-          src={cards.image}
-          alt={cards.nameRU} />
+          src={`https://api.nomoreparties.co/${card.image.url}`}
+          alt={card.nameRU} />
       </a>
       {(location.pathname === "/movies")
         ?

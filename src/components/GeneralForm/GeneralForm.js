@@ -6,13 +6,18 @@ import logo from "../../images/logo.svg";
 function GeneralForm(props) {
   const location = useLocation();
   const {
+    isValid,
+    errors,
+    values,
+    onChange,
+    onSubmit,
     title,
     buttonName,
     linkSpanText,
     linkText,
     linkRoute
   } = props
-
+console.log(isValid)
   return (
     <section className="general">
       <div className="general__container">
@@ -23,50 +28,62 @@ function GeneralForm(props) {
           <h2 className="general-header__title">{title}</h2>
         </div>
 
-        <form className="general-form">
+        <form className="general-form" onSubmit={onSubmit} noValidate>
           <fieldset className="general-form__input-fieldset">
 
             {location.pathname === "/signup" &&
               <div className="general-form__input-field">
                 <label className="general-form__input-label" htmlFor="name"
                 >Имя</label>
-                <input className="general-form__input"
+                <input className={`general-form__input ${errors.name && "general-form__input_color_red"}`}
+                  onChange={onChange}
                   required minLength="2" maxLength="40"
                   id="name"
                   placeholder="Имя"
                   name="name" type="text"
+                  value={values.name || ""}
                 ></input>
-                <span className="general-form__input-error"></span>
+                <span className={`general-form__input-error ${errors.name && "general-form__input-error_visible"}`}
+                >{errors.name}</span>
               </div>
             }
 
             <div className="general-form__input-field">
               <label className="general-form__input-label" htmlFor="email"
               >E-mail</label>
-              <input className="general-form__input"
-                required minLength="2" maxLength="40"
+              <input className={`general-form__input ${errors.email && "general-form__input_color_red"}`}
+                onChange={onChange}
+                required
                 id="email"
                 placeholder="Email"
+                value={values.email || ""}
                 name="email" type="email"
               ></input>
-              <span className="general-form__input-error"></span>
+              <span className={`general-form__input-error ${errors.email && "general-form__input-error_visible"}`}
+              >{errors.email}</span>
             </div>
 
             <div className="general-form__input-field">
               <label className="general-form__input-label" htmlFor="password"
               >Пароль</label>
-              <input className="general-form__input general-form__input_color_red"
-                required minLength="2" maxLength="40"
+              <input className={`general-form__input ${errors.password && "general-form__input_color_red"}`}
+                onChange={onChange}
+                required minLength="6"
                 id="password"
-                placeholder="Пароль"
+                placeholder="Введите пароль"
+                value={values.password || ""}
                 name="password" type="password"
+                autoComplete="new-password"
               ></input>
-              <span className="general-form__input-error">Что-то пошло не так...</span>
+              <span className={`general-form__input-error ${errors.password && "general-form__input-error_visible"}`}
+              >{errors.password}</span>
             </div>
           </fieldset>
 
           <div className="general-form__button-box">
-            <button className="general-form__button">{buttonName}</button>
+            <button className="general-form__button" type="submit" aria-label={buttonName}
+            disabled={!isValid && true}>{buttonName}</button>
+
             <div className="general-form__link-field">
               <span className="general-form__link-span">{linkSpanText}</span>
               <Link className="general-form__link" to={linkRoute}>{linkText}</Link>
