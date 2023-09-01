@@ -10,8 +10,8 @@ export function useForm() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
   };
 
@@ -24,5 +24,13 @@ export function useForm() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm };
+  return {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+    setValues,
+    setIsValid
+  };
 }

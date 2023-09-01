@@ -1,12 +1,28 @@
 import React from "react";
 import "./Login.css";
 import GeneralForm from "../GeneralForm/GeneralForm";
+import { useForm } from "../../hooks/useForm";
 
-function Login() {
 
+function Login({ onLogin }) {
+  const { values, handleChange, errors, isValid } = useForm()
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onLogin({
+      email: values.email,
+      password: values.password,
+    })
+    console.log(values)
+  }
   return (
     <main className="login">
       <GeneralForm
+        isValid={isValid}
+        errors={errors}
+        values={values}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
         title="Рады видеть!"
         buttonName="Войти"
         linkSpanText="Ещё не зарегистрированы?"

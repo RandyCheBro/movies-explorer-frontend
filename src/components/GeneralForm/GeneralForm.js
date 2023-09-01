@@ -17,7 +17,7 @@ function GeneralForm(props) {
     linkText,
     linkRoute
   } = props
-console.log(isValid)
+  
   return (
     <section className="general">
       <div className="general__container">

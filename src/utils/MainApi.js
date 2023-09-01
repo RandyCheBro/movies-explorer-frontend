@@ -45,7 +45,7 @@ class MainApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }).then(this._check);
@@ -55,12 +55,41 @@ class MainApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
+        Accept: 'application/json',
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       }
     })
       .then(this._check)
   }
+
+  getSavedMovies() {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then(this._check);
+  }
+
+  updateUser({ name, email }) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    }).then(this._check);
+  }
+
+
 }
 
 const mainApi = new MainApi({
