@@ -16,6 +16,13 @@
   box-sizing: border-box;
 }
 
+.movies-cardlist__span-notfound {
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
   .movies-cardlist {
     padding-left: 30px;

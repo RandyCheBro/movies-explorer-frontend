@@ -12,6 +12,7 @@ function InfoTooltip({ isOpen, onClose, isSuccess, tooltipMessage }) {
         <img src={isSuccess ? successIcon : errorIcon} className='popup__image-tooltip' alt='подсказка' />
         <h3 className="popup__title-success">{tooltipMessage}</h3>
         <button onClick={onClose} className="popup__close" type="button" aria-label="закрытие"></button>
+        <button onClick={onClose} className="popup__succesbtn" type="button">{isSuccess? "Хорошо" : "Попробовать снова"}</button>
       </div>
     </div>
   );

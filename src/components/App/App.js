@@ -3,6 +3,7 @@ import React from "react";
 
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 import mainApi from "../../utils/MainApi";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -23,7 +24,6 @@ function App() {
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = React.useState(false);
   const [tooltipMessage, setTooltipMessage] = React.useState("")
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState(null);//заменить
   const [savedMovies, setSavedMovies] = React.useState([]);
   const isOpen = isTooltipPopupOpen;
 
@@ -33,8 +33,7 @@ function App() {
       mainApi.checkToken(jwt).then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          /* navigate("movies", { replace: true }) */
-          setUserEmail(res.email)
+         /*  navigate("movies", { replace: true }) */
         }
       })
         .catch((err) => {
@@ -49,7 +48,6 @@ function App() {
       Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies()])
         .then(([userData, movies]) => {
           setCurrentUser(userData)
-          console.log(userData, movies)//удалить
           setSavedMovies(movies)
         })
         .catch((err) => console.log(err))
@@ -65,13 +63,18 @@ function App() {
         console.log(email)
         navigate("/signin", { replace: true });
         setIsSuccess(true);
+        setIsTooltipPopupOpen(true);
+        setTooltipMessage("Успешная регистрация!")
       })
       .catch((err) => {
-        console.log(err);
-        setIsSuccess(false);
-      })
-      .finally(() => {
+        console.log(err)
         setIsTooltipPopupOpen(true);
+        setIsSuccess(false);
+        if (err === "Ошибка 409") {
+          setTooltipMessage("Пользователь с таким email уже существует")
+        } else {
+          setTooltipMessage("При регистрации пользователя произошла ошибка.")
+        }
       })
   }
 
@@ -82,14 +85,18 @@ function App() {
     mainApi.login(email, password)
       .then((data) => {
         setIsLoggedIn(true);
-        setUserEmail(email);
         localStorage.setItem("jwt", data.token);
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err)
         setIsTooltipPopupOpen(true);
-        setIsSuccess(false)
+        setIsSuccess(false);
+        if (err === "Ошибка 401") {
+          setTooltipMessage("Вы ввели неправильный логин или пароль.")
+        } else {
+          setTooltipMessage("При авторизации произошла ошибка. Токен не передан или передан не в том формате")
+        }
       })
   }
 
@@ -121,6 +128,7 @@ function App() {
 
   function closeAllPopups() {
     setIsTooltipPopupOpen(false);
+    setTooltipMessage("");
   }
 
   React.useEffect(() => {
@@ -165,7 +173,11 @@ function App() {
             element={
               <>
                 <Header isLoggedIn={isLoggedIn} />
-                <Movies />
+                <ProtectedRouteElement
+                  element={Movies}
+                  savedMovies={savedMovies}
+                  isLoggedIn={isLoggedIn}
+                ></ProtectedRouteElement>
                 <Footer />
               </>
             }
@@ -175,7 +187,10 @@ function App() {
             element={
               <>
                 <Header isLoggedIn={isLoggedIn} />
-                <SavedMovies />
+                <ProtectedRouteElement
+                  element={SavedMovies}
+                  isLoggedIn={isLoggedIn}
+                ></ProtectedRouteElement>
                 <Footer />
               </>
             }
@@ -185,7 +200,12 @@ function App() {
             element={
               <>
                 <Header isLoggedIn={isLoggedIn} />
-                <Profile onUpdate={handleUpdateUser} onSignOut={handleSignOut} />
+                <ProtectedRouteElement
+                  element={Profile}
+                  onUpdate={handleUpdateUser}
+                  onSignOut={handleSignOut}
+                  isLoggedIn={isLoggedIn}
+                ></ProtectedRouteElement>
               </>
             }
           />

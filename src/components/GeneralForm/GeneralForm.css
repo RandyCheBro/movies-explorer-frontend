@@ -51,7 +51,7 @@
   border: none;
   padding: 0;
   margin: 0;
-  gap: 24px;
+  gap: 25px;
 }
 
 .general-form__input-field {
@@ -91,7 +91,7 @@
 
 .general-form__input-error {
   position: absolute;
-  top: 48px;
+  top: 47px;
   color: #ee3465;
   font-size: 10px;
   font-weight: 400;

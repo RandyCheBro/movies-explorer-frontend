@@ -12,11 +12,11 @@ function SavedMovies() {
   }
 
   return (
-    <section className="movies">
+    <main>
       <SearchForm />
       <MoviesCardList cards={cards} isMoviesLoading={isMoviesLoading}/>
       <MoreCards onClick={handleMoviesLoading} isMoviesMore={false}/>
-    </section>
+    </main>
   );
 }
 

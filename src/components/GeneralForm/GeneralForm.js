@@ -17,7 +17,7 @@ function GeneralForm(props) {
     linkText,
     linkRoute
   } = props
-  
+
   return (
     <section className="general">
       <div className="general__container">
@@ -37,7 +37,7 @@ function GeneralForm(props) {
                 >Имя</label>
                 <input className={`general-form__input ${errors.name && "general-form__input_color_red"}`}
                   onChange={onChange}
-                  required minLength="2" maxLength="40"
+                  required minLength="2" maxLength="30"
                   id="name"
                   placeholder="Имя"
                   name="name" type="text"
@@ -54,6 +54,7 @@ function GeneralForm(props) {
               <input className={`general-form__input ${errors.email && "general-form__input_color_red"}`}
                 onChange={onChange}
                 required
+                pattern=".+@.+\..+"
                 id="email"
                 placeholder="Email"
                 value={values.email || ""}
@@ -82,7 +83,7 @@ function GeneralForm(props) {
 
           <div className="general-form__button-box">
             <button className="general-form__button" type="submit" aria-label={buttonName}
-            disabled={!isValid && true}>{buttonName}</button>
+              disabled={!isValid && true}>{buttonName}</button>
 
             <div className="general-form__link-field">
               <span className="general-form__link-span">{linkSpanText}</span>

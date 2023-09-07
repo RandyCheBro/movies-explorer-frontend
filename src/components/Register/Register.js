@@ -4,7 +4,7 @@ import GeneralForm from "../GeneralForm/GeneralForm";
 import { useForm } from "../../hooks/useForm";
 
 function Register({ onRegister }) {
-  const { values, handleChange, errors, isValid } = useForm()
+  const { values, handleChange, errors, isValid } = useForm();
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -13,7 +13,6 @@ function Register({ onRegister }) {
       password: values.password,
       name: values.name
     })
-    console.log(values)
   }
 
   return (
