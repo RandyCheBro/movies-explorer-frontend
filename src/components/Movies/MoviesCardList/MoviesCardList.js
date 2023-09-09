@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./MoviesCardList.css";
 import Preloader from "../Preloader/Preloader"
 import MoviesCard from "../MoviesCard/MoviesCard"
+import MoreCards from "../MoreCards/MoreCards";
+import { useLocation } from "react-router-dom";
 
 function MoviesCardList(props) {
   const {
@@ -9,28 +11,64 @@ function MoviesCardList(props) {
     movies,
     savedMovies,
     isNotFound,
-    errorReqMovies
+    errorReqMovies,
+    handleAddMovie,
+    handleDeleteMovie
   } = props
-  const []
+
+  const { pathname } = useLocation();
+  const [quantityMovies, setQuantityMovies] = useState(0);
+  const [isMoviesMore, setIsMoviesMore] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    if (pathname === "/saved-movies" || movies.length <= quantityMovies) {
+      setIsMoviesMore(false)
+    }
+    else setIsMoviesMore(true);
+  }, [pathname, quantityMovies, movies])
 
   useEffect(() => {
     const handleResize = (event) => {
       setWidth(event.target.innerWidth);
     };
-    window.addEventListener('resize', handleResize);
+    setTimeout(() => {
+      window.addEventListener('resize', handleResize);
+    }, 100);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   useEffect(() => {
-    if(width > 1000) {
-      movies.slice(0, 8)
+    if (width > 1000) {
+      setQuantityMovies(12);
     }
-  })
-  console.log(width)
-  console.log(movies.slice(0, 2))
+    if (width > 500 && width <= 1000) {
+      setQuantityMovies(8);
+    }
+    if (width > 0 && width <= 500) {
+      setQuantityMovies(5);
+    }
+  }, [width])
+
+  function handleClick() {
+    if (width > 1000) {
+      setQuantityMovies(quantityMovies + 3);
+    }
+    if (width > 500 && width <= 1000) {
+      setQuantityMovies(quantityMovies + 2);
+    }
+    if (width > 0 && width <= 500) {
+      setQuantityMovies(quantityMovies + 2);
+    }
+  }
+
+  function findSavedCard(card, savedMovies) {
+    if (savedMovies) {
+      return savedMovies.find((movie) => movie.movieId === card.id)
+    }
+  }
 
   return (
     <section className="movies-cardlist">
@@ -42,14 +80,19 @@ function MoviesCardList(props) {
       }
       {isMoviesLoading ? <Preloader /> :
         <ul className="movies-cardlist__table">
-          {movies.map(card => (
+          {movies.slice(0, quantityMovies).map(card => (
             <MoviesCard
-              {...card}
-              key={card.id}
+              /* {...card} */
+              key={card.movieId || card.id}
+              card={card}
+              savedCard={findSavedCard(card, savedMovies)}
+              handleAddMovie={handleAddMovie}
+              handleDeleteMovie={handleDeleteMovie}
             />
           ))}
         </ul>
       }
+      <MoreCards onClick={handleClick} isMoviesMore={isMoviesMore} />
     </section>
   );
 }

@@ -4,7 +4,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList"
 import cards from "../../utils/cards"
 import MoreCards from "../Movies/MoreCards/MoreCards"
 
-function SavedMovies() {
+function SavedMovies(cards) {
   const [isMoviesLoading, setIsMoviesLoading] = React.useState(true)
 
   function handleMoviesLoading() {

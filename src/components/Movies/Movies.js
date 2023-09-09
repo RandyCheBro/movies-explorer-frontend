@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm/SearchForm"
 import MoviesCardList from "./MoviesCardList/MoviesCardList"
-import MoreCards from "./MoreCards/MoreCards"
 import moviesApi from "../../utils/MoviesApi";
 import { filterMovies, filterDuration } from "../../utils/helpers";
 
-function Movies({ savedMovies }) {
+function Movies({ savedMovies, handleAddMovie, handleDeleteMovie}) {
   const [isMoviesLoading, setIsMoviesLoading] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [foundMovies, setFoundMovies] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
   const [errorReqMovies, setErrorReqMovies] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
@@ -43,13 +41,8 @@ function Movies({ savedMovies }) {
       setIsCheckboxChecked(true)
   }, [])
 
-  function handleMoviesLoading() {
-    setIsMoviesLoading(!isMoviesLoading)
-  }
-
   function handleFilterMovies(movies, inputSearch, isCheckboxChecked) {
     const filteredMoviesList = filterMovies(movies, inputSearch);
-    setFoundMovies(filteredMoviesList);
     setFilteredMovies(isCheckboxChecked ? filterDuration(filteredMoviesList) : filteredMoviesList);
     localStorage.setItem('movies', JSON.stringify(filteredMoviesList));
   }
@@ -57,14 +50,11 @@ function Movies({ savedMovies }) {
   function handleChangeCheckbox(evt) {
     setIsCheckboxChecked(!isCheckboxChecked);
     localStorage.setItem('checkboxValue', evt.target.checked)
-
-    console.log(localStorage.getItem('checkboxValue'))
   }
 
   function handleGetMovies(inputSearch) {
     localStorage.setItem('inputSearch', inputSearch)
     localStorage.setItem('checkboxValue', isCheckboxChecked)
-    console.log(localStorage.getItem('checkboxValue'))
     if (allMovies.length === 0) {
       setIsMoviesLoading(true)
       moviesApi.getMovies()
@@ -97,8 +87,9 @@ function Movies({ savedMovies }) {
         savedMovies={savedMovies}
         isNotFound={isNotFound}
         errorReqMovies={errorReqMovies}
+        handleAddMovie={handleAddMovie}
+        handleDeleteMovie={handleDeleteMovie}
       />
-      <MoreCards onClick={handleMoviesLoading} isMoviesMore={true} />
     </main>
   );
 }

@@ -1,7 +1,8 @@
 .more-cards {
-  padding: 50px 70px 80px;
+  padding: 60px 0 80px;
   display: flex;
   justify-content: center;
+  align-self: normal;
 }
 
 .more-cards__plug {
@@ -30,14 +31,6 @@
 
 @media screen and (max-width: 850px) {
   .more-cards {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .more-cards {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-top: 80px;
   }
 }

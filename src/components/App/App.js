@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 
-import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 import mainApi from "../../utils/MainApi";
@@ -19,6 +19,7 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = React.useState(false);
@@ -33,15 +34,16 @@ function App() {
       mainApi.checkToken(jwt).then((res) => {
         if (res) {
           setIsLoggedIn(true);
-         /*  navigate("movies", { replace: true }) */
         }
+        navigate(pathname, { replace: true });
       })
         .catch((err) => {
           localStorage.removeItem("jwt")
           console.log(err)
         })
     }
-  }, [navigate])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   React.useEffect(() => {
     if (isLoggedIn) {
@@ -60,7 +62,6 @@ function App() {
     }
     mainApi.register(email, password, name)
       .then(() => {
-        console.log(email)
         navigate("/signin", { replace: true });
         setIsSuccess(true);
         setIsTooltipPopupOpen(true);
@@ -101,7 +102,8 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("jwt");
+    localStorage.clear();
+    setCurrentUser({});
     setIsLoggedIn(false);
     navigate("/", { replace: true });
   }
@@ -123,6 +125,27 @@ function App() {
         } else {
           setTooltipMessage("При обновлении профиля произошла ошибка.")
         }
+      })
+  }
+
+  function handleAddMovie(movie) {
+    mainApi.addMovie(movie)
+      .then((res) => {
+        setSavedMovies([res, ...savedMovies])
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  function handleDeleteMovie(movie) {
+    const savedMovie = savedMovies.find((i) => i.movieId === movie.id)
+    mainApi.deleteMovie(savedMovie._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((m) => m.movieId  !== movie.id));
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -176,6 +199,8 @@ function App() {
                 <ProtectedRouteElement
                   element={Movies}
                   savedMovies={savedMovies}
+                  handleAddMovie={handleAddMovie}
+                  handleDeleteMovie={handleDeleteMovie}
                   isLoggedIn={isLoggedIn}
                 ></ProtectedRouteElement>
                 <Footer />
@@ -189,6 +214,7 @@ function App() {
                 <Header isLoggedIn={isLoggedIn} />
                 <ProtectedRouteElement
                   element={SavedMovies}
+                  cards={savedMovies}
                   isLoggedIn={isLoggedIn}
                 ></ProtectedRouteElement>
                 <Footer />

@@ -89,6 +89,40 @@ class MainApi {
     }).then(this._check);
   }
 
+  addMovie(movie) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        year: movie.year,
+        duration: movie.duration,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
+    }).then(this._check);
+  }
+
+  deleteMovie(cardId) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/movies/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then(this._check);
+  }
 
 }
 
