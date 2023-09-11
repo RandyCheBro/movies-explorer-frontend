@@ -127,7 +127,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  /* baseUrl: 'https://api.domainname.kolya.nomoreparties.co', */
+  /* baseUrl: 'https://api.movie.nomoreparties.co', */
   baseUrl: 'http://localhost:3000'
 })
 

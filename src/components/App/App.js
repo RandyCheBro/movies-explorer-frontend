@@ -139,10 +139,10 @@ function App() {
   }
 
   function handleDeleteMovie(movie) {
-    const savedMovie = savedMovies.find((i) => i.movieId === movie.id)
+    const savedMovie = savedMovies.find((i) => i.movieId === movie.id || i.movieId === movie.movieId)
     mainApi.deleteMovie(savedMovie._id)
       .then(() => {
-        setSavedMovies((state) => state.filter((m) => m.movieId  !== movie.id));
+        setSavedMovies((state) => state.filter((m) => !(m.movieId  === movie.id || m.movieId === movie.movieId)));
       })
       .catch((err) => {
         console.log(err)
@@ -214,7 +214,8 @@ function App() {
                 <Header isLoggedIn={isLoggedIn} />
                 <ProtectedRouteElement
                   element={SavedMovies}
-                  cards={savedMovies}
+                  savedMovies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
                   isLoggedIn={isLoggedIn}
                 ></ProtectedRouteElement>
                 <Footer />

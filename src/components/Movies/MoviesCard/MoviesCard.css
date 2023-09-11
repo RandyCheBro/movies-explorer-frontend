@@ -30,6 +30,7 @@
 }
 
 .movies-card__duration {
+  min-width: fit-content;
   color: #8b8b8b;
   font-size: 13px;
   font-weight: 400;
@@ -42,6 +43,7 @@
   padding: 0;
   margin: 0;
   max-height: 200px;
+  width: 100%;
 }
 
 .movies-card__link:hover {
@@ -100,12 +102,13 @@
   font-weight: 400;
   line-height: 11px;
   padding: 0;
+  margin-top: 18px;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s linear;
 }
 
-.movies-card__delete {
+.movies-card__delete:hover {
   opacity: 0.7;
 }
 
@@ -159,6 +162,10 @@
   }
 
   .movies-card__savebtn {
+    margin-top: 14px;
+  }
+
+  .movies-card__delete {
     margin-top: 14px;
   }
 }

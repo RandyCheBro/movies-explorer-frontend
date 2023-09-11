@@ -3,6 +3,7 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
+
   const {
     card,
     savedCard,
@@ -17,7 +18,7 @@ function MoviesCard(props) {
   function getCurrentDuration() {
     const hours = Math.trunc(card.duration / 60)
     const minutes = card.duration - hours * 60
-    if(hours === 0) {
+    if (hours === 0) {
       return `0ч ${card.duration}м`
     } else {
       return `${hours}ч ${minutes}м`
@@ -25,19 +26,19 @@ function MoviesCard(props) {
   }
 
   function handleChangeButton() {
-    if(savedCard) {
+    if (savedCard) {
       handleDeleteMovie(card)
     } else {
       handleAddMovie(card);
     }
   }
 
-  function hadleDeleteMovie(evt) {
-    evt.target.parentElement.remove()
+  function hadleDeleteButton() {
+    handleDeleteMovie(card)
   }
 
   useEffect(() => {
-    if(savedCard) {
+    if (savedCard) {
       setButtonText("");
     } else {
       setButtonText("Сохранить")
@@ -58,7 +59,7 @@ function MoviesCard(props) {
       <a className="movies-card__link" href={card.trailerLink} target='_blank'
         rel="noreferrer">
         <img className="movies-card__image"
-          src={`https://api.nomoreparties.co/${card.image.url}`}
+          src={(typeof card.image) === "string" ? card.image : `https://api.nomoreparties.co/${card.image.url}`}
           alt={card.nameRU} />
       </a>
       {(pathname === "/movies")
@@ -71,7 +72,7 @@ function MoviesCard(props) {
           {buttonText}
         </button>
         :
-        <button onClick={hadleDeleteMovie}
+        <button onClick={hadleDeleteButton}
           aria-label="Удаление"
           id="movie-button"
           className="movies-card__delete"

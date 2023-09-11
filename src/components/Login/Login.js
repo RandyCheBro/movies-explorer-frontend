@@ -13,7 +13,6 @@ function Login({ onLogin }) {
       email: values.email,
       password: values.password,
     })
-    console.log(values)
   }
   return (
     <main className="login">
