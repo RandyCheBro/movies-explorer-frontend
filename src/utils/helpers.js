@@ -4,15 +4,15 @@ function filterMovies(movies, inputSearch) {
     const movieRu = String(movie.nameRU).toLowerCase().trim();
     const movieEn = String(movie.nameEN).toLowerCase().trim();
     return movieRu.includes(search) || movieEn.includes(search);
-  })
-  return filteredMovies
+  });
+  return filteredMovies;
 }
 
 function filterDuration(movies) {
-  return movies.filter((movie) => movie.duration <= 40 );
+  return movies.filter((movie) => movie.duration <= 40);
 }
 
 export {
   filterMovies,
-  filterDuration
-}
+  filterDuration,
+};

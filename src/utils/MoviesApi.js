@@ -6,16 +6,15 @@ class MoviesApi {
   _check(res) {
     if (res.ok) {
       return res.json();
-    } else {
-      return Promise.reject(`Ошибка ${res.status}`);
     }
+    return Promise.reject(`Ошибка ${res.status}`);
   }
 
   getMovies() {
     return fetch(`${this._baseUrl}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then(this._check);
   }
