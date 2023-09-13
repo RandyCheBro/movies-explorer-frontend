@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 
 
-function Login({ onLogin, isLoggedIn }) {
+function Login({ onLogin, isLoggedIn, isFormDisabled }) {
   const navigate = useNavigate();
   const { values, handleChange, errors, isValid } = useForm();
 
@@ -35,6 +35,7 @@ function Login({ onLogin, isLoggedIn }) {
         linkSpanText="Ещё не зарегистрированы?"
         linkText="Регистрация"
         linkRoute="/signup"
+        isFormDisabled={isFormDisabled}
       />
     </main>
   );

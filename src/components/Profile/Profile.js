@@ -3,11 +3,10 @@ import "./Profile.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useForm } from "../../hooks/useForm";
 
-function Profile({ onUpdate, onSignOut }) {
+function Profile({ onUpdate, onSignOut, isFormDisabled }) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setValues } = useForm()
   const [isDisabled, setIsDisabled] = useState(false);
-
   useEffect(() => {
     if (currentUser) {
       setValues(currentUser);
@@ -45,6 +44,7 @@ function Profile({ onUpdate, onSignOut }) {
                 id="name"
                 placeholder="Имя"
                 autoComplete="off"
+                disabled={isFormDisabled}
                 name="name" type="text"></input>
               <span className={`profile__input-error ${errors.name && "profile__input-error_visible"}`}
               >{errors.name}</span>
@@ -61,6 +61,7 @@ function Profile({ onUpdate, onSignOut }) {
                 id="email"
                 placeholder="E-mail"
                 autoComplete="new-email"
+                disabled={isFormDisabled}
                 name="email" type="email"></input>
               <span className={`profile__input-error ${errors.email && "profile__input-error_visible"}`}
               >{errors.email}</span>
@@ -68,7 +69,7 @@ function Profile({ onUpdate, onSignOut }) {
 
             <div className="profile__button-field">
               <button className="profile__button profile__edit-button" type="submit"
-                disabled={isDisabled}>Редактировать</button>
+                disabled={isDisabled || isFormDisabled}>Редактировать</button>
               <button className="profile__button profile__exit-button" type="button" onClick={onSignOut}>Выйти из аккаунта</button>
             </div>
           </fieldset>

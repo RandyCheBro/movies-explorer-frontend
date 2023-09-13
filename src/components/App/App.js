@@ -26,6 +26,7 @@ function App() {
   const [tooltipMessage, setTooltipMessage] = React.useState("")
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isFormDisabled, setIsFormDisabled] = React.useState(false)
   const isOpen = isTooltipPopupOpen;
 
   React.useEffect(() => {
@@ -60,6 +61,7 @@ function App() {
     if (!email || !password || !name) {
       return;
     }
+    setIsFormDisabled(true);
     mainApi.register(email, password, name)
       .then(() => {
         handleLogin({ email, password });
@@ -77,12 +79,16 @@ function App() {
           setTooltipMessage("При регистрации пользователя произошла ошибка.")
         }
       })
+      .finally(() => {
+        setIsFormDisabled(false);
+      })
   }
 
   function handleLogin({ email, password }) {
     if (!email || !password) {
       return;
     }
+    setIsFormDisabled(true);
     mainApi.login(email, password)
       .then((data) => {
         setIsLoggedIn(true);
@@ -99,6 +105,9 @@ function App() {
           setTooltipMessage("При авторизации произошла ошибка. Токен не передан или передан не в том формате")
         }
       })
+      .finally(() => {
+        setIsFormDisabled(false);
+      })
   }
 
   function handleSignOut() {
@@ -109,6 +118,7 @@ function App() {
   }
 
   function handleUpdateUser({ name, email }) {
+    setIsFormDisabled(false);
     mainApi.updateUser({ name, email })
       .then((data) => {
         setCurrentUser(data);
@@ -125,6 +135,9 @@ function App() {
         } else {
           setTooltipMessage("При обновлении профиля произошла ошибка.")
         }
+      })
+      .finally(() => {
+        setIsFormDisabled(false);
       })
   }
 
@@ -231,6 +244,7 @@ function App() {
                   element={Profile}
                   onUpdate={handleUpdateUser}
                   onSignOut={handleSignOut}
+                  isFormDisabled={isFormDisabled}
                   isLoggedIn={isLoggedIn}
                 ></ProtectedRouteElement>
               </>
@@ -243,6 +257,7 @@ function App() {
                 <Login
                   onLogin={handleLogin}
                   isLoggedIn={isLoggedIn}
+                  isFormDisabled={isFormDisabled}
                 />
               </>
             }
@@ -254,6 +269,7 @@ function App() {
                 <Register
                   onRegister={handleRegister}
                   isLoggedIn={isLoggedIn}
+                  isFormDisabled={isFormDisabled}
                 />
               </>
             }

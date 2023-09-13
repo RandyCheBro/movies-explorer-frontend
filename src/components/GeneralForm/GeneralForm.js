@@ -15,7 +15,8 @@ function GeneralForm(props) {
     buttonName,
     linkSpanText,
     linkText,
-    linkRoute
+    linkRoute,
+    isFormDisabled
   } = props
 
   return (
@@ -42,6 +43,7 @@ function GeneralForm(props) {
                   placeholder="Имя"
                   name="name" type="text"
                   value={values.name || ""}
+                  disabled={isFormDisabled}
                 ></input>
                 <span className={`general-form__input-error ${errors.name && "general-form__input-error_visible"}`}
                 >{errors.name}</span>
@@ -59,6 +61,7 @@ function GeneralForm(props) {
                 placeholder="Email"
                 value={values.email || ""}
                 name="email" type="email"
+                disabled={isFormDisabled}
               ></input>
               <span className={`general-form__input-error ${errors.email && "general-form__input-error_visible"}`}
               >{errors.email}</span>
@@ -75,6 +78,7 @@ function GeneralForm(props) {
                 value={values.password || ""}
                 name="password" type="password"
                 autoComplete="new-password"
+                disabled={isFormDisabled}
               ></input>
               <span className={`general-form__input-error ${errors.password && "general-form__input-error_visible"}`}
               >{errors.password}</span>
@@ -83,7 +87,7 @@ function GeneralForm(props) {
 
           <div className="general-form__button-box">
             <button className="general-form__button" type="submit" aria-label={buttonName}
-              disabled={!isValid && true}>{buttonName}</button>
+              disabled={!isValid || isFormDisabled}>{buttonName}</button>
 
             <div className="general-form__link-field">
               <span className="general-form__link-span">{linkSpanText}</span>
