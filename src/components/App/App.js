@@ -42,7 +42,7 @@ function App() {
           console.log(err)
         })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   React.useEffect(() => {
@@ -62,7 +62,7 @@ function App() {
     }
     mainApi.register(email, password, name)
       .then(() => {
-        navigate("/signin", { replace: true });
+        handleLogin({ email, password });
         setIsSuccess(true);
         setIsTooltipPopupOpen(true);
         setTooltipMessage("Успешная регистрация!")
@@ -142,7 +142,7 @@ function App() {
     const savedMovie = savedMovies.find((i) => i.movieId === movie.id || i.movieId === movie.movieId)
     mainApi.deleteMovie(savedMovie._id)
       .then(() => {
-        setSavedMovies((state) => state.filter((m) => !(m.movieId  === movie.id || m.movieId === movie.movieId)));
+        setSavedMovies((state) => state.filter((m) => !(m.movieId === movie.id || m.movieId === movie.movieId)));
       })
       .catch((err) => {
         console.log(err)
