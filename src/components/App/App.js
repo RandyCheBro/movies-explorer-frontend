@@ -240,7 +240,10 @@ function App() {
             path="/signin"
             element={
               <>
-                <Login onLogin={handleLogin} />
+                <Login
+                  onLogin={handleLogin}
+                  isLoggedIn={isLoggedIn}
+                />
               </>
             }
           />
@@ -248,7 +251,10 @@ function App() {
             path="/signup"
             element={
               <>
-                <Register onRegister={handleRegister} />
+                <Register
+                  onRegister={handleRegister}
+                  isLoggedIn={isLoggedIn}
+                />
               </>
             }
           />
