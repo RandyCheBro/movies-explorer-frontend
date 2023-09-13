@@ -24,6 +24,13 @@ function Movies({ savedMovies, handleAddMovie, handleDeleteMovie }) {
   }, [isCheckboxChecked])
 
   useEffect(() => {
+    if (allMovies.length === 0 && localStorage.getItem('beatfilmMovies')) {
+      const movies = JSON.parse(localStorage.getItem('beatfilmMovies'));
+      setAllMovies(movies);
+    }
+  }, [allMovies])
+
+  useEffect(() => {
     if (localStorage.getItem('inputSearch')) {
       if (filteredMovies.length === 0) {
         setIsNotFound(true)
@@ -67,6 +74,7 @@ function Movies({ savedMovies, handleAddMovie, handleDeleteMovie }) {
       moviesApi.getMovies()
         .then(movies => {
           setAllMovies(movies)
+          localStorage.setItem('beatfilmMovies', JSON.stringify(movies));
           handleFilterMovies(movies, inputSearch, isCheckboxChecked)
         })
         .catch((err) => {
