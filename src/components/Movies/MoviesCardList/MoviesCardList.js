@@ -77,32 +77,36 @@ function MoviesCardList(props) {
         <span className="movies-cardlist__span-notfound">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span>
       }
       {isMoviesLoading && <Preloader />}
-
-      {pathname === "/saved-movies" ?
-        <ul className="movies-cardlist__table">
-          {movies.map(card => (
-            <MoviesCard
-              key={card.movieId || card.id}
-              card={card}
-              savedCard={findSavedCard(card, savedMovies)}
-              handleAddMovie={handleAddMovie}
-              handleDeleteMovie={handleDeleteMovie}
-            />
-          ))}
-        </ul>
-        :
-        <ul className="movies-cardlist__table">
-          {movies.slice(0, quantityMovies).map(card => (
-            <MoviesCard
-              key={card.movieId || card.id}
-              card={card}
-              savedCard={findSavedCard(card, savedMovies)}
-              handleAddMovie={handleAddMovie}
-              handleDeleteMovie={handleDeleteMovie}
-            />
-          ))}
-        </ul>
+      {!isNotFound && !errorReqMovies && !isMoviesLoading &&
+        <>
+          {pathname === "/saved-movies" ?
+            <ul className="movies-cardlist__table">
+              {movies.map(card => (
+                <MoviesCard
+                  key={card.movieId || card.id}
+                  card={card}
+                  savedCard={findSavedCard(card, savedMovies)}
+                  handleAddMovie={handleAddMovie}
+                  handleDeleteMovie={handleDeleteMovie}
+                />
+              ))}
+            </ul>
+            :
+            <ul className="movies-cardlist__table">
+              {movies.slice(0, quantityMovies).map(card => (
+                <MoviesCard
+                  key={card.movieId || card.id}
+                  card={card}
+                  savedCard={findSavedCard(card, savedMovies)}
+                  handleAddMovie={handleAddMovie}
+                  handleDeleteMovie={handleDeleteMovie}
+                />
+              ))}
+            </ul>
+          }
+        </>
       }
+
       <MoreCards onClick={handleClick} isMoviesMore={isMoviesMore} />
     </section>
   );

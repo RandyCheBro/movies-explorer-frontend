@@ -3,7 +3,7 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 import { useLocation } from "react-router-dom";
 
-function SearchForm({ getMovies, isCheckboxChecked, handleChangeCheckbox }) {
+function SearchForm({ getMovies, isCheckboxChecked, onChangeCheckbox }) {
   const { pathname } = useLocation();
   const [isSpanError, setIsSpanError] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +17,10 @@ function SearchForm({ getMovies, isCheckboxChecked, handleChangeCheckbox }) {
       getMovies(searchValue)
       setIsSpanError(false)
     }
+  }
+
+  function handleChangeCheckbox(evt) {
+    onChangeCheckbox(evt, searchValue)
   }
 
   function handleChange(evt) {
@@ -50,7 +54,7 @@ function SearchForm({ getMovies, isCheckboxChecked, handleChangeCheckbox }) {
         }
       </form>
       <FilterCheckbox
-        handleChange={handleChangeCheckbox}
+        handleChange={pathname === "/movies" ? handleChangeCheckbox : onChangeCheckbox}
         isCheckboxChecked={isCheckboxChecked}
       />
       <div className="search__border"></div>

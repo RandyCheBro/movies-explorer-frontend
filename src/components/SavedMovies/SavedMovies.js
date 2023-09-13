@@ -38,7 +38,7 @@ function SavedMovies({ savedMovies, handleDeleteMovie }) {
       <SearchForm
         getMovies={handleFilterMovies}
         isCheckboxChecked={isCheckboxChecked}
-        handleChangeCheckbox={handleChangeCheckbox}
+        onChangeCheckbox={handleChangeCheckbox}
       />
       <MoviesCardList
         movies={filteredMovies}

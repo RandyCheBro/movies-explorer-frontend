@@ -4,7 +4,7 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList"
 import moviesApi from "../../utils/MoviesApi";
 import { filterMovies, filterDuration } from "../../utils/helpers";
 
-function Movies({ savedMovies, handleAddMovie, handleDeleteMovie}) {
+function Movies({ savedMovies, handleAddMovie, handleDeleteMovie }) {
   const [isMoviesLoading, setIsMoviesLoading] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
@@ -47,9 +47,16 @@ function Movies({ savedMovies, handleAddMovie, handleDeleteMovie}) {
     localStorage.setItem('movies', JSON.stringify(filteredMoviesList));
   }
 
-  function handleChangeCheckbox(evt) {
+  function handleChangeCheckbox(evt, searchValue) {
     setIsCheckboxChecked(!isCheckboxChecked);
     localStorage.setItem('checkboxValue', evt.target.checked)
+    const localSearchValue = localStorage.getItem('inputSearch')
+    if (searchValue) {
+      if (filteredMovies.length !== 0 && searchValue !== localSearchValue) {
+        localStorage.setItem('inputSearch', searchValue)
+        handleFilterMovies(allMovies, searchValue, isCheckboxChecked)
+      }
+    }
   }
 
   function handleGetMovies(inputSearch) {
@@ -79,7 +86,7 @@ function Movies({ savedMovies, handleAddMovie, handleDeleteMovie}) {
       <SearchForm
         getMovies={handleGetMovies}
         isCheckboxChecked={isCheckboxChecked}
-        handleChangeCheckbox={handleChangeCheckbox}
+        onChangeCheckbox={handleChangeCheckbox}
       />
       <MoviesCardList
         isMoviesLoading={isMoviesLoading}
