@@ -4,6 +4,13 @@ import Preloader from "../Preloader/Preloader"
 import MoviesCard from "../MoviesCard/MoviesCard"
 import MoreCards from "../MoreCards/MoreCards";
 import { useLocation } from "react-router-dom";
+import {
+  FULL_SCREEN_BREAKPOINT, TABLET_SCREEN_BREAKPOINT,
+  MOBILE_SCREEN_BREAKPOINT, FULL_SCREEN_QUANTITY_MOVIES,
+  TABLET_SCREEN_QUANTITY_MOVIES,
+  MOBILE_SCREEN_QUANTITY_MOVIES, FULL_SCREEN_MORE_BUTTON,
+  TABLET_SCREEN_MORE_BUTTON, INITIAL_STATE_QUANTITY_MOVIES
+} from "../../../utils/constants"
 
 function MoviesCardList(props) {
   const {
@@ -17,7 +24,7 @@ function MoviesCardList(props) {
   } = props
 
   const { pathname } = useLocation();
-  const [quantityMovies, setQuantityMovies] = useState(0);
+  const [quantityMovies, setQuantityMovies] = useState(INITIAL_STATE_QUANTITY_MOVIES);
   const [isMoviesMore, setIsMoviesMore] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -41,26 +48,26 @@ function MoviesCardList(props) {
   }, []);
 
   useEffect(() => {
-    if (width > 1000) {
-      setQuantityMovies(12);
+    if (width > FULL_SCREEN_BREAKPOINT) {
+      setQuantityMovies(FULL_SCREEN_QUANTITY_MOVIES);
     }
-    if (width > 500 && width <= 1000) {
-      setQuantityMovies(8);
+    if (width > TABLET_SCREEN_BREAKPOINT && width <= FULL_SCREEN_BREAKPOINT) {
+      setQuantityMovies(TABLET_SCREEN_QUANTITY_MOVIES);
     }
-    if (width > 0 && width <= 500) {
-      setQuantityMovies(5);
+    if (width > MOBILE_SCREEN_BREAKPOINT && width <= TABLET_SCREEN_BREAKPOINT) {
+      setQuantityMovies(MOBILE_SCREEN_QUANTITY_MOVIES);
     }
   }, [width])
 
   function handleClick() {
-    if (width > 1000) {
-      setQuantityMovies(quantityMovies + 3);
+    if (width > FULL_SCREEN_BREAKPOINT) {
+      setQuantityMovies(quantityMovies + FULL_SCREEN_MORE_BUTTON);
     }
-    if (width > 500 && width <= 1000) {
-      setQuantityMovies(quantityMovies + 2);
+    if (width > TABLET_SCREEN_BREAKPOINT && width <= FULL_SCREEN_BREAKPOINT) {
+      setQuantityMovies(quantityMovies + TABLET_SCREEN_MORE_BUTTON);
     }
-    if (width > 0 && width <= 500) {
-      setQuantityMovies(quantityMovies + 2);
+    if (width > MOBILE_SCREEN_BREAKPOINT && width <= TABLET_SCREEN_BREAKPOINT) {
+      setQuantityMovies(quantityMovies + TABLET_SCREEN_MORE_BUTTON);
     }
   }
 

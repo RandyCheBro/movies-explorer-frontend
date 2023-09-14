@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
+import { QUANTITY_MINUTES_IN_HOUR } from "../../../utils/constants"
 
 function MoviesCard(props) {
 
@@ -16,8 +17,8 @@ function MoviesCard(props) {
   const { pathname } = useLocation();
 
   function getCurrentDuration() {
-    const hours = Math.trunc(card.duration / 60)
-    const minutes = card.duration - hours * 60
+    const hours = Math.trunc(card.duration / QUANTITY_MINUTES_IN_HOUR)
+    const minutes = card.duration - hours * QUANTITY_MINUTES_IN_HOUR
     if (hours === 0) {
       return `0ч ${card.duration}м`
     } else {

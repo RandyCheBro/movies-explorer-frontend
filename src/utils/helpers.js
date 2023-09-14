@@ -1,3 +1,5 @@
+import { SHORT_MOVIE_DURATION } from "./constants"
+
 function filterMovies(movies, inputSearch) {
   const filteredMovies = movies.filter((movie) => {
     const search = inputSearch.toLowerCase().trim();
@@ -9,7 +11,7 @@ function filterMovies(movies, inputSearch) {
 }
 
 function filterDuration(movies) {
-  return movies.filter((movie) => movie.duration <= 40);
+  return movies.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
 }
 
 export {
