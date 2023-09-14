@@ -1,22 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm"
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList"
-import cards from "../../utils/cards"
-import MoreCards from "../Movies/MoreCards/MoreCards"
+import { filterMovies, filterDuration } from "../../utils/helpers";
 
-function SavedMovies() {
-  const [isMoviesLoading, setIsMoviesLoading] = React.useState(true)
+function SavedMovies({ savedMovies, handleDeleteMovie }) {
 
-  function handleMoviesLoading() {
-    setIsMoviesLoading(!isMoviesLoading)
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [inputSearch, setInputSearch] = useState("");
+
+
+  useEffect(() => {
+    if (filteredMovies.length === 0) {
+      setIsNotFound(true)
+    }
+    else {
+      setIsNotFound(false)
+    }
+  }, [filteredMovies])
+
+  useEffect(() => {
+    const filteredMoviesList = filterMovies(savedMovies, inputSearch);
+    setFilteredMovies(isCheckboxChecked ? filterDuration(filteredMoviesList) : filteredMoviesList);
+  }, [savedMovies, inputSearch, isCheckboxChecked])
+
+  function handleChangeCheckbox() {
+    setIsCheckboxChecked(!isCheckboxChecked);
+  }
+
+  function handleFilterMovies(inputSearchValue) {
+    setInputSearch(inputSearchValue);
   }
 
   return (
-    <section className="movies">
-      <SearchForm />
-      <MoviesCardList cards={cards} isMoviesLoading={isMoviesLoading}/>
-      <MoreCards onClick={handleMoviesLoading} isMoviesMore={false}/>
-    </section>
+    <main>
+      <SearchForm
+        getMovies={handleFilterMovies}
+        isCheckboxChecked={isCheckboxChecked}
+        onChangeCheckbox={handleChangeCheckbox}
+      />
+      <MoviesCardList
+        movies={filteredMovies}
+        savedMovies={savedMovies}
+        isNotFound={isNotFound}
+        handleDeleteMovie={handleDeleteMovie}
+      />
+    </main>
   );
 }
 

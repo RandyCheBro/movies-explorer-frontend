@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Promo.css";
 import planetLogo from "../../../images/planet-logo.svg";
+import { Link } from "react-scroll";
 
 function Promo() {
   return (
@@ -11,7 +11,7 @@ function Promo() {
         <p className="promo__subtitle">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <Link className="promo__link" to="/">Узнать больше</Link>
+        <Link className="promo__link" to="about-project" >Узнать больше</Link>
       </div>
       <img src={planetLogo} alt="логотип проекта" className="promo__image"></img>
     </section>

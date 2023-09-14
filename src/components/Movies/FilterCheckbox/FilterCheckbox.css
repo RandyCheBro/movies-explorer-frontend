@@ -1,5 +1,6 @@
 .filter-checkbox {
   display: inline-block;
+  max-width: fit-content;
 }
 
 .filter-checkbox__input {

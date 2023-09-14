@@ -5,11 +5,16 @@ import iconAccount from "../../images/account-icon.svg"
 import NavMenu from "../NavMenu/NavMenu";
 
 function Navigation() {
-const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-const handleIsOpen = () => {
-  setIsOpen(!isOpen)
-}
+  const handleIsOpen = () => {
+    setIsOpen(!isOpen)
+    if (!isOpen)
+      document.body.classList.add('body-overflow')
+    else {
+      document.body.classList.remove('body-overflow')
+    }
+  }
 
   return (
     <nav>
@@ -23,12 +28,12 @@ const handleIsOpen = () => {
         <NavLink className="navigation__link" to="/profile">
           Аккаунт
           <div className="navigation__icon-box">
-          <img className="navigation__icon" src={iconAccount} alt="логотип аккаунта"></img>
+            <img className="navigation__icon" src={iconAccount} alt="логотип аккаунта"></img>
           </div>
         </NavLink>
       </ul>
       <button className="navigation__button-menu" onClick={handleIsOpen} type="button" aria-label="открытие"></button>
-      <NavMenu isOpen={isOpen} OnClose={handleIsOpen}/>
+      <NavMenu isOpen={isOpen} OnClose={handleIsOpen} />
     </nav>
   );
 }
