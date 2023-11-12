@@ -1,6 +1,7 @@
 # Проект: Movie-Explorer-Frontent
+![Превью проекта](https://github.com/RandyCheBro/imgs-for-README/blob/main/movie-explorer%201.png?raw=true)
 
-### Обзор
+## Обзор
 
 _Cервис Movie-Explorer это интерактивная, адаптивная страница, куда можно добавлять фильмы, удалять их и сохранять в избранные._
 
@@ -12,9 +13,53 @@ _Cервис Movie-Explorer это интерактивная, адаптивн�
 * В файловую структуру был добавлен сборщик Webpack с различными NPM пакетами, для оптимизации сайта для старых браузеров, сжатия и облегчения файлов для более быстрой загрузки.
 * Приложение загружено на удалённый сервер Yandex Compute Cloud
 
+## Стэк:
+<p align="left"> 
+  <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> 
+  </a> 
+  <a href="https://expressjs.com" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> 
+  </a> 
+  <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> 
+    <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> 
+  </a> 
+  <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> 
+    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> 
+  </a> 
+  <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> 
+  </a> 
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> 
+  </a> 
+  <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> 
+  </a> 
+  <a href="https://nodejs.org" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> 
+  </a> 
+  <a href="https://postman.com" target="_blank" rel="noreferrer"> 
+    <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> 
+  </a> 
+  <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> 
+  </a> 
+  <a href="https://webpack.js.org" target="_blank" rel="noreferrer"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/d00d0969292a6569d45b06d3f350f463a0107b0d/icons/webpack/webpack-original-wordmark.svg" alt="webpack" width="40" height="40"/> 
+  </a> </p>
 
-**Название макета** - dark-4
+## Ссылка на макет проекта:
+[Ссылка на макет в Figma](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/Дипломный-проект?node-id=1%3A9662&mode=dev)
 
-**Ссылка на пул реквест** - https://github.com/RandyCheBro/movies-explorer-frontend/pull/2#issue-1891632014
-
-**Ссылка на задеплоенный на сервере проект** - https://movie.nomoreparties.co/
+## Установка:
+- Создать виртуальную машину или удалённый сервер.  
+- Установить Node.js на удалённом сервере.
+- Скопировать [Backend](https://github.com/RandyCheBro/movies-explorer-api.git) директорию проекта на сервер.
+- В директории с проектом ввести команду "npm install".
+- Получить доменное имя для Frontend и Backend части проекта.
+- настроить фаервол и Nginx на сервере для работы с доменными именами.
+- Скопировать [Frontend](https://github.com/RandyCheBro/movies-explorer-frontend.git) на локальный компьютер.
+- На локальном компьютере в директории Frontend ввести команду "npm build".
+- Скопировать директорию "build" на удалённый сервер.
+- При помощи службы PM2 настроить автозапуск 'app' из директории "build"
